@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController // dispatcherServlet이 Mapping해줄 Controller를 등록
+// @RestController : dispatcherServlet이 Mapping해줄 Controller를 등록
+// @RequestMapping : controller가 할당 된 후 어떤 method를 실행할지 연결해주는 어노테이션
+
+@RestController
 @RequestMapping("/api/v1/get-api")
 public class GetController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    // controller가 할당 된 후 어떤 method를 실행할지 연결해주는 어노테이션
     public String hello() {
         return "Hello World";
     }
