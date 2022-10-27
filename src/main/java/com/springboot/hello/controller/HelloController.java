@@ -2,6 +2,8 @@ package com.springboot.hello.controller;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController // dispatcherServlet이 Mapping해줄 Controller를 등록
 @RequestMapping("/api/v1/get-api")
 public class HelloController {
@@ -28,7 +30,7 @@ public class HelloController {
     }
 
 
-    // /request1 을 받는 get endpoint만들기
+    // /request1 을 받는 get endpoint 만들기
     @GetMapping(value = "/request1")
     // RequestParam으로 3개의 값 받기
     public String getVariable2(@RequestParam String name,
@@ -37,4 +39,15 @@ public class HelloController {
         return String.format("%s %s %s", name, email, organization);
     }
 
+    // Map으로 requestParam 받는 방법
+    @GetMapping(value = "/request2")
+    public String getVariable2(@RequestParam Map<String, String> param) {
+
+        // entrySet() : key와 value 둘다 출력
+        param.entrySet().forEach((map)-> { // map이 파라미터로 들어온다.
+            System.out.printf("key:%s value:%s", map.getKey(), map.getValue());
+        });
+
+        return "request2가 호출 완료";
+    }
 }
