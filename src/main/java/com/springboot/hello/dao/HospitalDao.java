@@ -43,7 +43,7 @@ public class HospitalDao {
     }
 
     public void deleteAll() {
-        this.jdbcTemplate.update("delelte from nation_wide_hospitals");
+        this.jdbcTemplate.update("delete from nation_wide_hospitals");
     }
 
     public int getCount() {
