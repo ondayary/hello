@@ -29,15 +29,27 @@ class HospitalParserTest {
     HospitalDao hospitalDao;
 
     @Test
-    @DisplayName("Hospital이 insert가 잘 되는지")
-    void add() {
+    @DisplayName("Hospital이 insert, select 잘되는지")
+    void addAndGet() {
+        hospitalDao.deleteAll();
+        assertEquals(0, hospitalDao.getCount());
+
         HospitalParser hp = new HospitalParser();
         Hospital hospital = hp.parse(line1);
+
         hospitalDao.add(hospital);
+        assertEquals(1, hospitalDao.getCount());
         // get이 없어서 assert는 눈으로
 
         // 그냥실행하면 url error 발생
         // Environment Variable넘겨서 application.yml의 값 대체 하기
+
+        Hospital selectedHospital = hospitalDao.findById(hospital.getId());
+        assertEquals(selectedHospital.getId(), hospital.getId());
+        assertEquals(selectedHospital.getOpenServiceName(), hospital.getOpenServiceName());
+        assertEquals(selectedHospital.getHospitalName(), hospital.getHospitalName());
+
+
     }
 
     @Test
