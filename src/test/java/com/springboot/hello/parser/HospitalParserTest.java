@@ -35,7 +35,9 @@ class HospitalParserTest {
         Hospital hospital = hp.parse(line1);
         hospitalDao.add(hospital);
         // get이 없어서 assert는 눈으로
-        // findById,
+
+        // 그냥실행하면 url error 발생
+        // Environment Variable넘겨서 application.yml의 값 대체 하기
     }
 
     @Test
