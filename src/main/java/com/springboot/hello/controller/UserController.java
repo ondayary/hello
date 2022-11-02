@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
     private final UserDao userDao;
@@ -35,14 +35,12 @@ public class UserController {
         return userDao.findById("1");
     }
 
-    /*
-    @PostMapping("/user")
-    public ResponseEntity<Integer> add(@RequestBody UserDto userDto) throws SQLException, ClassNotFoundException {
-        User user = new User(
-                userDto.getId(),
-                userDto.getName(),
-                userDto.getPassword());
-        return ResponseEntity.ok().body(user.add(user));
+    /*@PostMapping("")
+    public ResponseEntity<Integer> add(@RequestBody UserDto userRequestDto) throws SQLException, ClassNotFoundException {
+        User user = new User(userRequestDto.getId(), userRequestDto.getName(), userRequestDto.getPassword());
+        return ResponseEntity
+                .ok()
+                .body(userDao.add(user));
     }*/
 
     @DeleteMapping("/user")

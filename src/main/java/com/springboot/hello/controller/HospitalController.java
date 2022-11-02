@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/h1")
+@RequestMapping("/api/v1/hospital")
 public class HospitalController {
 
     private final HospitalDao hospitalDao;
@@ -26,11 +26,6 @@ public class HospitalController {
         return "Hello Hospital Controller";
     }
 
-    @GetMapping("/{id")
-    public ResponseEntity<Hospital> get(@PathVariable String id) {
-        return ResponseEntity.ok().body(this.hospitalDao.findById(Integer.parseInt(id)));
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Hospital> get(@PathVariable Integer id) {
         Hospital hospital = hospitalDao.findById(id);
@@ -42,8 +37,4 @@ public class HospitalController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Hospital());
         }
     }
-
-
-
-
 }
