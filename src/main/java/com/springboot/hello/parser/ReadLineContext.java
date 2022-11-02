@@ -21,6 +21,8 @@ public class ReadLineContext<T> {
                 new FileReader(filename)
         );
         String str;
+
+        // 에러로그 남기기
         while ((str = reader.readLine()) != null) {
             try {
                 result.add(parser.parse(str));

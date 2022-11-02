@@ -10,9 +10,9 @@ import java.util.Map;
 // @RequestMapping: controller가 할당 된 후 어떤 method를 실행할지 연결해주는 어노테이션
 // 로그 남기는 방법: Slf4j Annotation을 Class위에 추가 후 log.info()로 남긴다.
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/get-api")
-@Slf4j
 public class GetController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
