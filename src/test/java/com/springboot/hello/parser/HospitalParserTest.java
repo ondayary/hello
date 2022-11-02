@@ -2,6 +2,7 @@ package com.springboot.hello.parser;
 
 import com.springboot.hello.dao.HospitalDao;
 import com.springboot.hello.domain.Hospital;
+import com.springboot.hello.service.HospitalService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,9 @@ class HospitalParserTest {
 
     @Autowired // HospitalDao는 Factory도 없는데 왜 될까요?
     HospitalDao hospitalDao;
+
+    @Autowired
+    HospitalService hospitalService;
 
     @Test
     @DisplayName("Hospital이 insert, select 잘되는지")
@@ -72,16 +76,17 @@ class HospitalParserTest {
     @DisplayName("10만건 이상 데이터가 파싱 되는지")
     void oneHundreadThousandRows() throws IOException {
         // 서버환경에서 build 할 때 문제가 생길 수 있다.
-        String filename = "/Users/daon/Downloads/fulldata_01_01_02_P_의원1.csv";
-        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
+        // 어디에서든지 실행할 수 있게 짜는 것이 목표.
+        hospitalDao.deleteAll(); // db를 한번 비우고 시작
 
-        assertTrue(hospitalList.size() > 1000);
-        assertTrue(hospitalList.size() > 10000);
+        String filename = "/Users/daon/Desktop/수업자료/mysql_db/fulldata_01_01_02_P_의원1.csv";
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(hospitalList.get(i).getHospitalName());
-        }
-        System.out.printf("파싱된 데이터 개수:", hospitalList.size());
+        int cnt = this.hospitalService.insertLargeVolumeHospitalData(filename);
+
+        assertTrue(cnt > 1000);
+        assertTrue(cnt > 10000);
+
+        System.out.printf("파싱된 데이터 개수:%d",cnt);
     }
 
     @Test
